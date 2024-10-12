@@ -20,7 +20,7 @@ fetch("https://flossy-five-bayberry.glitch.me/t/001", requestOptions)
   .then((response) => response.json())  // Parse the response as JSON
         .then((result) => {
         document.getElementById("titelzin").innerHTML = result.tekst;
-        document.getElementById("foto").src = result.poster;
+        document.getElementById("foto").src = result.url;
         document.getElementById("gebruikersnaam").innerHTML = result.username;
        document.getElementById("tag").innerHTML = result.tag;
         })
