@@ -1,0 +1,31 @@
+ <!DOCTYPE html>
+ <html style="scroll-behavior: smooth">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+    </style>
+    </head>
+    <body>
+  <p id="username"></p>
+   <img id="foto">
+   <h3 id="titelzin"></h3>
+<h4 id="tag"></h4>
+    <script>
+    const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+fetch("https://flossy-five-bayberry.glitch.me/t/001", requestOptions)
+  .then((response) => response.json())  // Parse the response as JSON
+        .then((result) => {
+        document.getElementById("titelzin").innerHTML = result.tekst;
+        document.getElementById("foto").src = result.poster;
+        document.getElementById("gebruikersnaam").innerHTML = result.username;
+       document.getElementById("tag").innerHTML = result.tag;
+        })
+        .catch((error) => console.error(error));
+        }
+    </script>
+    </body>
+   </html>
