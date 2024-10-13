@@ -55,6 +55,119 @@
       text-align: center;
       margin-top: 10px;
     }
+    #post{
+    width:5vw;
+    height:5vw;
+    border-radius:50%;
+    border:none;
+    outline:none;
+    background-color: #151b23;
+    color: white;
+    box-shadow: 2px 3px 12px rgba(0, 90, 204, 0.5);
+    position:absolute;
+    top:90vh;
+    left:90vw;
+    transition:0.4s;
+    }
+    #post:hover{
+    width:5.1vw;
+    height:5.1vw;
+    border-radius:50%;
+    border:none;
+    outline:none;
+    background-color: #151b23;
+    color: white;
+    box-shadow: 5px 6px 15px rgba(0, 90, 204, 0.5);
+    position:absolute;
+    top:90vh;
+    left:90vw;
+    transition:0.4s;
+    }
+    #sluit{
+    width:5vw;
+    height:5vw;
+    border-radius:50%;
+    border:none;
+    outline:none;
+    background-color: #151b23;
+    color: white;
+    box-shadow: 2px 3px 12px rgba(0, 90, 204, 0.5);
+    position:absolute;
+    top:2vh;
+    left:2vw;
+    transition:0.4s;
+    }
+    #sluit:hover{
+    width:5.1vw;
+    height:5.1vw;
+    border-radius:50%;
+    border:none;
+    outline:none;
+    background-color: #151b23;
+    color: white;
+    box-shadow: 5px 6px 15px rgba(0, 90, 204, 0.5);
+    position:absolute;
+    transition:0.4s;
+    }
+    #postbericht {
+    margin-top:25px;
+      width: 34vw;
+      background-color: #151b23;
+      color: white;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      padding-top:10vw;
+      display: none;
+      flex-direction: column;
+      /*align-items: center;*/
+      justify-content: space-between;
+      height: 45vh;
+      z-index:999;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+    }
+    input{
+    background-color:#2b3849;
+    color:white;
+    border:none;
+    outline:none;
+    border-radius:5px;
+    width:100%;
+    height:8%;
+    }
+    button{
+    background-color:#2b3849;
+    color:white;
+    border:none;
+    outline:none;
+    border-radius:5px;
+    width:100%;
+    height:8%;
+    }
+    select{
+    background-color:#2b3849;
+    color:white;
+    border:none;
+    outline:none;
+    border-radius:5px;
+    width:100%;
+    height:8%;
+    overflow-y: hidden;
+    }
+    option{
+    border:none;
+    outline:none;
+    }
+    ::-webkit-scrollbar {width: 0px; height: 0px}
+    ::-webkit-scrollbar-thumb {
+    background-color: black;
+    }
+    ::-webkit-scrollbar-track {
+    background-color: white;
+    }
   </style>
 </head>
 <body>
@@ -65,14 +178,62 @@
     <h3 id="titelzin"></h3>
     <h4 id="tag"></h4>
   </div>
-
+  <button onclick="stuur()" id="post">+</button>
+  <div id="postbericht">
+  <button onclick="nietstuur()" id="sluit">x</button>
+  <input type="text" placeholder="username">
+  <input type="url" placeholder="image url">
+  <input type="text" placeholder="title">
+  <select>
+  <option value="Corvette">Corvette</option>
+  <option value="Bmw">BMW</option>
+  <option value="Mercedes">Mercedes-Benz</option>
+  <option value="Audi">Audi</option>
+  <option value="Porsche">Porsche</option>
+  <option value="Nissan">Nissan</option>
+  <option value="Toyota">Toyota</option>
+  <option value="Honda">Honda</option>
+  <option value="Ford">Ford</option>
+  <option value="Chevrolet">Chevrolet</option>
+  <option value="Ferrari">Ferrari</option>
+  <option value="Lamborghini">Lamborghini</option>
+  <option value="McLaren">McLaren</option>
+  <option value="Volkswagen">Volkswagen</option>
+  <option value="Mazda">Mazda</option>
+  <option value="Subaru">Subaru</option>
+  <option value="Jaguar">Jaguar</option>
+  <option value="Corvette">Corvette</option>
+  <option value="Bmw">Bmw</option>
+  <option value="JDM">JDM</option>
+  <option value="Drift">Drift</option>
+  <option value="Supercar">Supercar</option>
+  <option value="MuscleCar">Muscle Car</option>
+  <option value="TrackDay">Track Day</option>
+  <option value="GermanEngineering">German Engineering</option>
+  <option value="Tuned">Tuned</option>
+  <option value="OffRoad">Off-Road</option>
+  <option value="Stance">Stance</option>
+  <option value="Turbo">Turbo</option>
+</select>
+<button>submit</button>
+  </div>
+  <script>
+  function stuur(){
+  document.getElementById("postbericht").style.display = "flex";
+  document.getElementById("bericht").style.display = "none";
+  }
+  function nietstuur(){
+  document.getElementById("postbericht").style.display = "none";
+  document.getElementById("bericht").style.display = "flex";
+  }
+  </script>
   <script>
     const requestOptions = {
       method: "GET",
       redirect: "follow"
     };
 
-    fetch("https://flossy-five-bayberry.glitch.me/t/001", requestOptions)
+    fetch("https://flossy-five-bayberry.glitch.me/001", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         document.getElementById("titelzin").innerHTML = result.tekst;
@@ -84,3 +245,4 @@
   </script>
 </body>
 </html>
+
