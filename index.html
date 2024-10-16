@@ -13,7 +13,7 @@
       font-family: Arial, sans-serif;
     }
 
-    #bericht {
+    .bericht {
     margin-top:25px;
       width: 34vw;
       background-color: #151b23;
@@ -26,9 +26,10 @@
       /*align-items: center;*/
       justify-content: space-between;
       height: 60vh;
+      margin-left:1vw;
     }
 
-    #gebruikersnaam {
+    .gebruikersnaam {
       font-weight: bold;
       font-size: 1.2em;
       margin-bottom: 10px;
@@ -172,19 +173,19 @@
 </head>
 <body>
 <br>
-  <div id="bericht">
-    <p id="gebruikersnaam"></p>
-    <img id="foto">
-    <h3 id="titelzin"></h3>
-    <h4 id="tag"></h4>
+  <div class="bericht">
+    <p id="gebruikersnaam" class="gebruikersnaam"></p>
+    <img class="foto" id="foto">
+    <h3 class="titelzin"id="titelzin"></h3>
+    <h4 class="tag" id="tag"></h4>
   </div>
   <button onclick="stuur()" id="post">+</button>
   <div id="postbericht">
   <button onclick="nietstuur()" id="sluit">x</button>
-  <input type="text" placeholder="username">
-  <input type="url" placeholder="image url">
-  <input type="text" placeholder="title">
-  <select>
+  <input id="usn"type="text" placeholder="username">
+  <input id="iurl"type="url" placeholder="image url">
+  <input id="ttl"type="text" placeholder="title">
+  <select id="tg">
   <option value="Corvette">Corvette</option>
   <option value="Bmw">BMW</option>
   <option value="Mercedes">Mercedes-Benz</option>
@@ -215,7 +216,7 @@
   <option value="Stance">Stance</option>
   <option value="Turbo">Turbo</option>
 </select>
-<button>submit</button>
+<button onclick="stuurbericht()">submit</button>
   </div>
   <script>
   function stuur(){
@@ -233,7 +234,7 @@
       redirect: "follow"
     };
 
-    fetch("https://flossy-five-bayberry.glitch.me/001", requestOptions)
+    fetch("https://flossy-five-bayberry.glitch.me/t/001", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         document.getElementById("titelzin").innerHTML = result.tekst;
@@ -243,6 +244,45 @@
       })
       .catch((error) => console.error(error));
   </script>
+  <script>
+  function stuurbericht(){
+  var username = document.getElementById("usn").value;
+  var imageurl = document.getElementById("iurl").value;
+  var titel = document.getElementById("ttl").value;
+  var tag = document.getElementById("tg").value;
+  const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify({
+  "tekst": titel,
+  "username": username,
+  "url": imageurl,
+  "tag": tag
+});
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+fetch("https://flossy-five-bayberry.glitch.me/t/002", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+  
+  var newDiv = document.createElement("div");
+  newDiv.classList.add("bericht");
+  newDiv.innerHTML = `
+    <p class="gebruikersnaam">${username}</p>
+    <img class="foto" src="${imageurl}">
+    <h3 class="titelzin">${titel}</h3>
+    <h4 class="tag">${tag}</h4>
+  `;
+  var container = document.body;  // Je kunt hier ook een andere container targeten
+  container.appendChild(newDiv);
+  }
+  </script>
 </body>
 </html>
-
