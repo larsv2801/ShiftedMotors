@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html style="scroll-behavior: smooth">
 <head>
@@ -171,14 +172,14 @@
     }
   </style>
 </head>
-<body>
+<body onload="check()">
 <br>
-  <div class="bericht">
+  <!--<div class="bericht">
     <p id="gebruikersnaam" class="gebruikersnaam"></p>
     <img class="foto" id="foto">
     <h3 class="titelzin"id="titelzin"></h3>
     <h4 class="tag" id="tag"></h4>
-  </div>
+  </div>-->
   <button onclick="stuur()" id="post">+</button>
   <div id="postbericht">
   <button onclick="nietstuur()" id="sluit">x</button>
@@ -229,7 +230,7 @@
   }
   </script>
   <script>
-    const requestOptions = {
+    /*const requestOptions = {
       method: "GET",
       redirect: "follow"
     };
@@ -242,7 +243,7 @@
         document.getElementById("gebruikersnaam").innerHTML = result.username;
         document.getElementById("tag").innerHTML = result.tag;
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error));*/
   </script>
   <script>
   function stuurbericht(){
@@ -283,6 +284,39 @@ fetch("https://flossy-five-bayberry.glitch.me/t/002", requestOptions)
   var container = document.body;  // Je kunt hier ook een andere container targeten
   container.appendChild(newDiv);
   }
+  </script>
+  <script>
+  function check() {
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+
+  fetch("https://flossy-five-bayberry.glitch.me/messages", requestOptions)
+    .then((response) => response.json()) // Zorg ervoor dat je de response als JSON verwerkt
+    .then((result) => {
+      var hoeveel = result.aantal; // 'aantal' moet in JSON zitten
+
+      for (let i = 1; i <= hoeveel; i++) {
+        fetch(`https://flossy-five-bayberry.glitch.me/t/00${i}`, requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            var newDiv = document.createElement("div");
+            newDiv.classList.add("bericht");
+            newDiv.innerHTML = `
+              <p class="gebruikersnaam">${result.username}</p>
+              <img class="foto" src="${result.url}">
+              <h3 class="titelzin">${result.tekst}</h3>
+              <h4 class="tag">${result.tag}</h4>
+            `;
+            document.body.appendChild(newDiv);
+          })
+          .catch((error) => console.error(error));
+      }
+    })
+    .catch((error) => console.error(error));
+}
+
   </script>
 </body>
 </html>
