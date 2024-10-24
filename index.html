@@ -299,7 +299,8 @@ fetch(`https://flossy-five-bayberry.glitch.me/t/00${naarwelknummerposten}`, requ
     .then((response) => response.json()) // Zorg ervoor dat je de response als JSON verwerkt
     .then((result) => {
       hoeveel = result.aantal;
-      naarwelknummerposten = parseInt(hoeveel);// 'aantal' moet in JSON zitten
+      naarwelknummerposten = parseInt(hoeveel, 10);
+      naarwelknummerposten += 1;// 'aantal' moet in JSON zitten
 
       for (let i = 1; i <= hoeveel; i++) {
         fetch(`https://flossy-five-bayberry.glitch.me/t/00${i}`, requestOptions)
